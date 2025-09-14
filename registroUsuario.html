@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro Usuario</title>
+    <link rel="stylesheet" href="css/registroUsuarioEstilo.css">
+</head>
+<body>
+  <header>
+    <h1>Registrar Usuario</h1>
+  </header>
+  <section>
+    <form id="formulario-producto">
+      <table>
+        <tr>
+          <td colspan="2">
+            <label id="labelNombre">Nombre Completo</label>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input type="text" id="txtNombre" name="txtNombre">
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <label id="labelCorreo">Correo</label>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input type="email" id="txtCorreo" name="txtCorreo">
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <label id="labelCorreoConfirm">Confirmar Correo</label>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input type="email" id="txtCorreoConfirm" name="txtCorreoConfirm">
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <label id="labelPass">Contraseña</label>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input type="password" name="txtPass" id="txtPass">
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <label id="labelPassConfirm">Confirmar Contraseña</label>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input type="password" name="txtPassConfirm" id="txtPassConfirm">
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <label id="labelTel">Numero Telefonico (Opcional)</label>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input type="text" name="numTel" id="numTel">
+          </td>
+        </tr>
+        <tr>
+            <td>
+                Region :
+                <select name="selRegion" id="selRegion" onchange="cambioComuna(this)">
+                    <option value="Nada">Seleccione una Region</option>
+                    <option value="Metropolitana">Metropolitana</option>
+                    <option value="Valparaiso">Valparaiso</option>
+                    <option value="O Higgins">O´Higgins</option>
+                    <option value="Maule">Maule</option>
+                    <option value="Ñuble">Ñuble</option>
+                    Metropolitana, Valparaiso, O´Higgins, Maule, Ñuble
+                </select>
+            </td>
+            <td>
+                Comuna : 
+                <select name="selComuna" id="selComuna" onchange="valorComuna(this)"> 
+                    <option value="0">Seleccione una Comuna</option>
+                    <option value="1"><label id="txtComuna1">Comuna 1</label></option>
+                    <option value="2"><label id="txtComuna2">Comuna 2</label></option>
+                    <option value="3"><label id="txtComuna3">Comuna 3</label></option>
+                    <option value="4"><label id="txtComuna4">Comuna 4</label></option>
+                    <option value="5"><label id="txtComuna5">Comuna 5</label></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+          <td>
+            <button type="submit">Registrarse</button>
+          </td>
+          <td>
+            <button type="reset">Limpiar Formulario</button>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </section>
+</body>
+<footer>
+</footer>
+
+<!-- java Script -->
+ <script src="js/Usuario.js"></script>
+ <script>
+
+    let region = "";
+    let comuna = "";
+
+    // Diccionario de Regiones y COmunas
+    let comuRegi = {
+            "Metropolitana": [ "Santiago", "Las Condes", "Providencia", "Peñalolén", "Vitacura"],
+            "Valparaiso": ["Valparaíso", "Viña del Mar", "Concepción", "Quilpué", "Limache"],
+            "O Higgins": ["Rancagua", "San Fernando", "Pichilemu", "Colchagua", "Santa Cruz"],
+            "Maule": ["Talca", "Curicó", "Linares", "Cauquenes", "Pelarco"],
+            "Ñuble": ["Chillán", "Bulnes", "Yungay", "Chillán Viejo", "Yerbas Buenas"]
+        };
+
+
+
+    document.getElementById('formulario-producto').addEventListener('submit', function(e) {
+      e.preventDefault(); // Evita el recargo de la página
+      guardarUsuario();
+    });
+
+    let nombre = "";
+    let correo = "";
+    let correoConfirm = "";
+    let contraseña = "";
+    let contraseñaConfirm = "";
+    let numero = "";
+
+
+
+    function cambioComuna(select){
+
+        const valRegi = select.value;
+        region = valRegi;
+          document.getElementById("txtComuna1").innerHTML = comuRegi[valRegi][0];
+          document.getElementById("txtComuna2").innerHTML = comuRegi[valRegi][1];
+          document.getElementById("txtComuna3").innerHTML = comuRegi[valRegi][2];
+          document.getElementById("txtComuna4").innerHTML = comuRegi[valRegi][3];
+          document.getElementById("txtComuna5").innerHTML = comuRegi[valRegi][4];
+        }
+
+
+    function valorComuna(select){
+        const valCom = select.value;
+        comuna = valCom;
+        let numComuna = Number(comuna);
+        if(numComuna >= 1 && numComuna <= 5){
+          numComuna = numComuna - 1;
+          comuna = comuRegi[region][numComuna];
+        }
+    }
+
+
+
+
+    function guardarUsuario(){
+
+      //Lista de Usuarios
+      let usuarioGuardado = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+      nombre = document.getElementById('txtNombre').value;
+      correo = document.getElementById('txtCorreo').value;
+      correoConfirm = document.getElementById('txtCorreoConfirm').value;
+      contraseña = document.getElementById('txtPass').value;
+      contraseñaConfirm = document.getElementById('txtPassConfirm').value;
+      numero = document.getElementById('numTel').value; 
+
+      // Validacion
+      if(validaciones(contraseña, contraseñaConfirm, correo, correoConfirm) === 0){
+        nuevaUsuario = new Usuario(1, nombre, correo, contraseña, numero, region, comuna)
+
+        usuarioGuardado.push(nuevaUsuario);
+        localStorage.setItem("usuarios", JSON.stringify(usuarioGuardado));
+
+        console.log("El Usuario Es : "+nombre+' '+correo+' '+correoConfirm+' '+ contraseña+' '+ contraseñaConfirm+' '+ numero+' '+ region+' '+ comuna)
+      }
+
+    }
+ </script>
+ <script>
+    // Limites
+    // Nombre
+    document.getElementById("txtNombre").required = true;
+    const nombreRequ = document.getElementById("txtNombre")
+    // Máximo 100 caracteres
+    nombreRequ.maxLength = 100;
+
+    // Correo
+    document.getElementById("txtCorreo").required = true;
+    let correoRequ = document.getElementById("txtCorreo") 
+    let larCorre = correo.value;
+
+    // Confirmar Correo
+    document.getElementById("txtCorreoConfirm").required = true;
+
+    // Contraseña
+    document.getElementById("txtPass").required = true;
+    const password = document.getElementById("txtPass")
+    // Maximo
+    password.maxLength = 10;
+
+    // Confirmar COntraseña
+    document.getElementById("txtPassConfirm").required = true;
+    const passwordConfirm = document.getElementById("txtPass")
+    // Maximo
+    passwordConfirm.maxLength = 10;
+
+    // Validaciones
+    function validaciones(contraseñaF, contraseñaConfirmF, correoF, correoConfirmF){
+      let resultado = 0;
+      if(valiPass(contraseñaF) === false){
+        resultado = 1;
+      } else if(passConfi(contraseñaF, contraseñaConfirmF) === false){
+        resultado = 1;
+      } else if(valiCorre(correoF) === false){
+        resultado = 1;
+      } else if(correConfi(correoF, correoConfirmF) === false){
+        resultado = 1;
+      }
+      return resultado;
+    }
+
+    // Contraseña
+    function valiPass(contraseñaF){
+      let valor = contraseñaF.length;
+      if(valor < 4){
+        document.getElementById("labelPass").innerHTML = "La contraseña es de minimo 4 caracteres";
+        return false;
+      } else {
+        return true;
+      }
+    }
+
+    // Confirmar Password
+    function passConfi(contraseñaF, contraseñaConfirmF){
+      if(contraseñaF === contraseñaConfirmF){
+        return true;
+      } else {
+        document.getElementById("labelPassConfirm").innerHTML = "Ambas contraseñas deben ser iguales";
+        return false;
+      }
+    }
+
+    // Correo
+    function valiCorre(correoF){
+      let carFormado = ""; // Caracter formado
+      let corteArroba = 0;
+
+      let larCorre = correoF.length;
+
+      for(let index = 0; index < larCorre; index++) {
+        // Slice para cortar 
+        let caracter = correoF.slice(index, index +1) // Primer valor , posicion de inicio , segundo valor , Posicion de termino
+        if(caracter === "@"){
+          carFormado += caracter;
+          corteArroba = 1; // Una vez pasado el arroba , forma el str
+        } else if (corteArroba === 1){
+          carFormado += caracter;
+        }
+      }
+      if(carFormado === "@gmail.com" || carFormado === "@duoc.cl" || carFormado === "@profesor.duoc.cl") {
+        console.log(carFormado);
+        return true;
+      } else {
+        document.getElementById("labelCorreo").innerHTML = "Solo se permiten correos @gmail.com, @duoc.cl, @profesor.duoc.cl";
+        return false; // Indica si el correo es Correcto o No
+      }
+
+    }
+
+    // Confirmar Correo
+    function correConfi(correoF, correoConfirmF){
+      if(correoF === correoConfirmF){
+        return true;
+      } else {
+        document.getElementById("labelCorreoConfirm").innerHTML = "Ambos correos deben ser iguales";
+        return false;
+      }
+    }
+ </script>
+</html>

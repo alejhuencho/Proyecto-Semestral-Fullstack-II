@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nuevo Producto</title>
+  <link rel="stylesheet" href="css/nuevoProductoEstilo.css">
+</head>
+<body>
+  <header>
+    <h1>Crear Producto</h1>
+  </header>
+  <section>
+    <form id="formulario-producto">
+      <table>
+        <tr>
+          <td colspan="2">
+            <label for="txtNombre">Nombre del Producto:</label>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input type="text" id="txtNombre" name="txtNombre">
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <label for="txtDescripcion">Descripción del Producto:</label>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <textarea id="txtDescripcion" name="txtDescripcion"></textarea>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <label for="numPrecio">Precio del Producto ($):</label>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input type="number" id="numPrecio" name="numPrecio" step="0.01">
+            <!-- step, define si son numeros enteros o decimales
+            step="1", numeros enteros
+            step="0.01, numero con 2 decimales
+            step="0.1", numero con 1 decimal-->
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <label for="imgImagen">Imagen del Producto:</label>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input type="file" id="imgImagen" name="imgImagen" accept="image/*" onchange="mostrarVistaPrevia(event)" >
+            <!-- onchance, realiza una accion cuando el input cambia -->
+            <img id="vista-previa" alt="Vista previa de imagen">
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <label for="numCantidad">Cantidad del Producto:</label>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input type="number" id="numCantidad" name="numCantidad">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <button type="submit">Guardar Producto</button>
+          </td>
+          <td>
+            <button type="reset">Limpiar Formulario</button>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </section>
+  <script src="js/producto.js"></script>
+  <script>
+    // Cuando la imagen del input cambia , se muestra la vista previa
+    function mostrarVistaPrevia(event) {
+      const archivo = event.target.files[0];
+      const vistaPrevia = document.getElementById('vista-previa');
+
+      if (archivo) {
+      const lector = new FileReader();
+
+      lector.onload = function(e) {
+          vistaPrevia.src = e.target.result;
+          vistaPrevia.style.display = 'block';
+      };
+
+      lector.readAsDataURL(archivo);
+      }
+    };
+
+    let stock = [
+      new Producto(1, "Catan", "Un clásico juego de estrategia donde los jugadores compiten por colonizar y expandirse en la isla de Catan. Ideal para 3-4 jugadores y perfecto para noches de juego en familia o con amigos.",
+              20.99, "img/catanTienda.jpg", 50),
+      new Producto(2, "Carcassonne", "Un juego de colocación de fichas donde los jugadores construyen el paisaje alrededor de la fortaleza medieval de Carcassonne. Ideal para 2-5 jugadores y fácil de aprender",
+              39.99, "img/carcassonne.jpg", 30),
+      new Producto(3, "Controlador Inalámbrico Xbox Series X", "Ofrece una experiencia de juego cómoda con botones mapeables y una respuesta táctil mejorada. Compatible con consolas Xbox y PC.",
+              59.99, "img/controladorInalambricoXBOXseriesX", 20)
+    ]
+
+    localStorage.setItem("stockProducto",JSON.stringify(stock));
+    // JSON.stringify(), es para cambiar un objeto o lista a texto en forma JSON
+    
+    document.getElementById('formulario-producto').addEventListener('submit', function(e) {
+      e.preventDefault(); // Evita el recargo de la página
+      agregarProducto();
+    });
+
+    // Agregar productos
+    function agregarProducto() {
+
+      let stockGuardado = JSON.parse(localStorage.getItem("stockProducto"));
+
+      const nombre = document.getElementById('txtNombre').value;
+      const descripcion = document.getElementById('txtDescripcion').value;
+      // Pasar de string a numero
+      const precioStr = document.getElementById('numPrecio').value;
+      const precio = Number(precioStr.replace('.', ''));
+      // --------------------------
+      const imagen = document.getElementById('imgImagen').files[0].name || '';
+      const cantidad = document.getElementById('numCantidad').value;
+
+      const id = stockGuardado.length > 0 ? stockGuardado[stockGuardado.length - 1].id + 1 : 1;
+
+      const nuevoProducto = new Producto(id, nombre, descripcion, precio, imagen, cantidad);
+
+      let existe = 0;
+      stockGuardado.forEach(produ => {
+        if (produ.nombre == nuevoProducto.nombre) {
+          existe = 1;
+        }
+      });
+      if (existe == 1) {
+        alert("El producto ya existe");
+      } else {
+        stockGuardado.push(nuevoProducto);
+        localStorage.setItem("stockProducto", JSON.stringify(stockGuardado));
+        return;
+      }
+      // reinicio de contador
+      existe = 0;
+  };
+  </script>
+</body>
+</html>
