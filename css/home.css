@@ -77,3 +77,20 @@ h1, h2, h3, h4, h5, h6 {
         height: 250px; /* Una altura más pequeña para pantallas de móviles y tablets */
     }
 }
+
+.carousel-img-container {
+    height: 350px; /* Define una altura fija para pantallas grandes */
+    overflow: hidden; /* Oculta cualquier parte de la imagen que se salga */
+}
+
+.carousel-img-container img {
+    object-fit: cover; /* Ajusta la imagen para que cubra todo el contenedor */
+    height: 100%; /* La imagen ocupa el 100% de la altura del contenedor */
+}
+
+/* Para pantallas más pequeñas (como móviles) */
+@media (max-width: 768px) {
+    .carousel-img-container {
+        height: 180px; /* Reduce la altura del banner en móviles */
+    }
+}

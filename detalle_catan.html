@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productos | LEVEL-UP GAMER</title>
+    <title>Catan | Detalle del Producto</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,8 +12,7 @@
     <link rel="stylesheet" href="css/home.css">
     <link rel="icon" type="image" href="img/logo.png">
 </head>
-<body onload="cargarGaleriaProductos()">
-
+<body class="bg-light">
     <header class="border-bottom sticky-top bg-white">
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid py-2 px-3">
@@ -72,15 +71,42 @@
         </nav>
     </header>
 
+    <div class="container my-5">
+        <div class="row bg-white shadow rounded p-4">
+            
+            <div class="col-md-6 border d-flex align-items-center justify-content-center" style="min-height:400px;">
+                <img id="producto-imagen" src="img/catan.jpg" class="img-fluid rounded" alt="Imagen de Catan" style="max-height: 380px; object-fit: contain;">
+            </div>
 
-    <main class="container py-5">
-        <div>
-            <h1 class="text-center mb-4">productos</h1>
-        </div>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4" id="galeria-productos">
-        </div>
-    </main>
+            <div class="col-md-6 bg-dark">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h1 class="h4 mb-0" id="producto-nombre">Catan</h1>
+                    <span class="h4 text-primary" id="producto-precio">Precio: $25.000</span>
+                </div>
 
+                <hr>
+                
+                <h5 class="fw-bold">Info del Producto</h5>
+                <p class="text-white" id="producto-descripcion">
+                Uno de los juegos de mesa más famosos del mundo. Los jugadores deben colonizar la isla de Catán recolectando recursos como madera, lana, trigo y piedra. Con ellos podrán construir caminos, aldeas y ciudades mientras comercian con otros jugadores. La estrategia y la negociación son clave para alcanzar los 10 puntos de victoria.
+                </p>
+
+                <hr>
+
+                <div class="mb-3 d-flex align-items-center">
+                    <h5 class="me-3 mb-0">Cantidad:</h5>
+                    <div class="input-group" style="width: 150px;">
+                        <button class="btn btn-warning" type="button" onclick="cambiarCantidad(-1)">-</button>
+                        <input type="text" class="form-control text-center" id="cantidad-input" value="1" readonly>
+                        <button class="btn btn-primary" type="button" onclick="cambiarCantidad(1)">+</button>
+                    </div>
+                </div>
+
+                <button class="btn btn-success btn-lg w-100" onclick="agregarAlCarrito()">Añadir al carrito</button>
+            </div>
+        </div>
+    </div>
+    
     <footer class="py-5 bg-dark text-light">
         <div class="container">
             <div class="row">
@@ -128,58 +154,34 @@
         </div>
     </footer>
 
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/productos.js"></script>
     <script>
-        function cargarGaleriaProductos() {
-            const galeria = document.getElementById("galeria-productos");
-            const productos = JSON.parse(localStorage.getItem("productos"));
-            
-            if (!productos) {
-                galeria.innerHTML = "<p>No hay productos disponibles.</p>";
-                return;
-            }
+        const productoId = 1;
 
-            let htmlProductos = '';
-            productos.forEach(p => {
-                let enlacePagina = '';
-                if (p.id === 1) enlacePagina = 'detalle_catan.html';
-                else if (p.id === 2) enlacePagina = 'detalle_carcassonne.html';
-                else if (p.id === 3) enlacePagina = 'detalle_play5.html';
-                else if (p.id === 4) enlacePagina = 'detalle_control_xbox.html';
-                else if (p.id === 5) enlacePagina = 'detalle_mouse_logitech.html';
-                else if (p.id === 6) enlacePagina = 'detalle_ASUS_ROG.html';
-                else if (p.id === 7) enlacePagina = 'detalle_silla_omen.html';
-                else if (p.id === 8) enlacePagina = 'detalle_Steam_Deck.html';
-                else if (p.id === 9) enlacePagina = 'detalle_Deep_Rock.html';
-                else if (p.id === 10) enlacePagina = 'detalle_Exploding_Kittens.html';
-                else if (p.id === 11) enlacePagina = 'detalle_gundam.html';
-                else if (p.id === 12) enlacePagina = 'detalle_pokemon.html';
-
-                htmlProductos += `
-                    <div class="col">
-                        <div class="card h-100">
-                            <a href="${enlacePagina}">
-                                <img src="${p.imagen}" class="card-img-top" alt="${p.nombre}">
-                            </a>
-                            <div class="card-body text-center d-flex flex-column">
-                                <a href="${enlacePagina}" class="text-decoration-none text-dark fw-bold">${p.nombre}</a>
-                                <p class="card-text mt-2">$${p.precio.toLocaleString('es-CL')}</p>
-                                <button class="btn btn-success mt-auto" onclick="agregarProducto(${p.id}, 1)">Agregar al Carrito</button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-            galeria.innerHTML = htmlProductos;
+        function cambiarCantidad(valor) {
+            const input = document.getElementById('cantidad-input');
+            let cantidad = parseInt(input.value);
+            cantidad += valor;
+            if (cantidad < 1 || isNaN(cantidad)) cantidad = 1;
+            input.value = cantidad;
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            cargarGaleriaProductos();
-            if (typeof actualizarTotalesCarrito === 'function') {
-                actualizarTotalesCarrito();
+        // CAMBIO: Esta función ahora muestra una ventana emergente
+        function agregarAlCarrito() {
+            const cantidad = parseInt(document.getElementById('cantidad-input').value);
+            window.agregarProducto(productoId, cantidad);
+            
+            const respuesta = confirm(`¡Catan se agregó al carrito! ¿Quieres ir al carrito de compras?`);
+
+            if (respuesta) {
+                window.location.href = "carrito.html";
+            } else {
+                // Si eligen "Cancelar", se quedan en la página actual
             }
-        });
+        }
     </script>
 </body>
 </html>
