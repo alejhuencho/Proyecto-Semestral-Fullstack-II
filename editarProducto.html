@@ -104,15 +104,6 @@
       }
     };
 
-
-    let produEditList = [
-      new Producto(1, "Catan", "Un clásico juego de estrategia donde los jugadores compiten por colonizar y expandirse en la isla de Catan. Ideal para 3-4 jugadores y perfecto para noches de juego en familia o con amigos.",
-              20.99, "img/catanTienda.jpg", 50)
-    ]
-
-    localStorage.setItem("productoEdit",JSON.stringify(produEditList));
-    // JSON.stringify(), es para cambiar un objeto o lista a texto en forma JSON
-    
     document.getElementById('formulario-producto').addEventListener('submit', function(e) {
       e.preventDefault(); // Evita el recargo de la página
       actualizarProducto();
