@@ -182,15 +182,19 @@
         }
         }
 
-        // Aplica los cambios
-        stockGuardado[0].id = id;
-        stockGuardado[0].nombre = nombre;
-        stockGuardado[0].descripcion = descripcion;
-        stockGuardado[0].precio = precio;
-        stockGuardado[0].imagen = imagen;
-        stockGuardado[0].cantidad = cantidad;
+        stockGuardado.forEach(produ => {
+          if(produ.id === produEdit[0].id){
+            // Aplica los cambios
+            stockGuardado[produ.id - 1].id = id;
+            stockGuardado[produ.id - 1].nombre = nombre;
+            stockGuardado[produ.id - 1].descripcion = descripcion;
+            stockGuardado[produ.id - 1].precio = precio;
+            stockGuardado[produ.id - 1].imagen = imagen;
+            stockGuardado[produ.id - 1].cantidad = cantidad;
 
-        localStorage.setItem("stockProducto", JSON.stringify(stockGuardado));
+            localStorage.setItem("stockProducto", JSON.stringify(stockGuardado));
+          }
+        })
       }
 
       existe = 0;

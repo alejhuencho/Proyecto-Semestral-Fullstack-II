@@ -15,7 +15,7 @@
       <table>
         <tr>
           <td colspan="2">
-            <label for="txtNombre">Nombre del Producto:</label>
+            <label id="labelNombre">Nombre del Producto:</label>
           </td>
         </tr>
         <tr>
@@ -25,7 +25,7 @@
         </tr>
         <tr>
           <td colspan="2">
-            <label for="txtDescripcion">Descripción del Producto:</label>
+            <label id="labelDescripcion">Descripción del Producto:</label>
           </td>
         </tr>
         <tr>
@@ -35,7 +35,7 @@
         </tr>
         <tr>
           <td colspan="2">
-            <label for="numPrecio">Precio del Producto ($):</label>
+            <label id="labelPrecio">Precio del Producto ($):</label>
           </td>
         </tr>
         <tr>
@@ -49,7 +49,7 @@
         </tr>
         <tr>
           <td colspan="2">
-            <label for="imgImagen">Imagen del Producto:</label>
+            <label id="labelImagen">Imagen del Producto:</label>
           </td>
         </tr>
         <tr>
@@ -61,7 +61,7 @@
         </tr>
         <tr>
           <td colspan="2">
-            <label for="numCantidad">Cantidad del Producto:</label>
+            <label id="labelCantidad">Cantidad del Producto:</label>
           </td>
         </tr>
         <tr>
@@ -99,16 +99,6 @@
       }
     };
 
-    let stock = [
-      new Producto(1, "Catan", "Un clásico juego de estrategia donde los jugadores compiten por colonizar y expandirse en la isla de Catan. Ideal para 3-4 jugadores y perfecto para noches de juego en familia o con amigos.",
-              20.99, "img/catanTienda.jpg", 50),
-      new Producto(2, "Carcassonne", "Un juego de colocación de fichas donde los jugadores construyen el paisaje alrededor de la fortaleza medieval de Carcassonne. Ideal para 2-5 jugadores y fácil de aprender",
-              39.99, "img/carcassonne.jpg", 30),
-      new Producto(3, "Controlador Inalámbrico Xbox Series X", "Ofrece una experiencia de juego cómoda con botones mapeables y una respuesta táctil mejorada. Compatible con consolas Xbox y PC.",
-              59.99, "img/controladorInalambricoXBOXseriesX", 20)
-    ]
-
-    localStorage.setItem("stockProducto",JSON.stringify(stock));
     // JSON.stringify(), es para cambiar un objeto o lista a texto en forma JSON
     
     document.getElementById('formulario-producto').addEventListener('submit', function(e) {
@@ -119,7 +109,7 @@
     // Agregar productos
     function agregarProducto() {
 
-      let stockGuardado = JSON.parse(localStorage.getItem("stockProducto"));
+      let stockGuardado = JSON.parse(localStorage.getItem("stockProducto")) || [];
 
       const nombre = document.getElementById('txtNombre').value;
       const descripcion = document.getElementById('txtDescripcion').value;
@@ -127,7 +117,7 @@
       const precioStr = document.getElementById('numPrecio').value;
       const precio = Number(precioStr.replace('.', ''));
       // --------------------------
-      const imagen = document.getElementById('imgImagen').files[0].name || '';
+      const imagen = "img/" + document.getElementById('imgImagen').files[0].name || '';
       const cantidad = document.getElementById('numCantidad').value;
 
       const id = stockGuardado.length > 0 ? stockGuardado[stockGuardado.length - 1].id + 1 : 1;
@@ -150,6 +140,27 @@
       // reinicio de contador
       existe = 0;
   };
+  </script>
+  <script>
+    // Nombre
+    document.getElementById("txtNombre").required = true;
+
+    // Descripcion
+    document.getElementById("txtDescripcion").required = true;
+
+    // Precio
+    document.getElementById("numPrecio").required = true;
+
+    // Imagen 
+    document.getElementById("imgImagen").required = true;
+
+    // Cantidad
+    document.getElementById("numCantidad").required = true;
+
+
+    //const nombreProdu = document.getElementById("txtNombre")
+    // Máximo 50 caracteres
+    //nombreRequ.maxLength = 100;
   </script>
 </body>
 </html>

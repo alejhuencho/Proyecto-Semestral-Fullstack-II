@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro Usuario</title>
+    <title>Nuevo Usuario</title>
     <link rel="stylesheet" href="css/registroUsuarioEstilo.css">
 </head>
 <body>
   <header>
-    <h1>Registrar Usuario</h1>
+    <h1>Nuevo Usuario</h1>
   </header>
   <section>
     <form id="formulario-producto">
@@ -77,6 +77,17 @@
           </td>
         </tr>
         <tr>
+            <td colspan="2">
+                Rol :
+                <select name="selRol" id="selRol" onchange="cambUser(this)">
+                    <option value="NoRol">Seleccione un rol</option>
+                    <option value="1">Usuario</option>
+                    <option value="2">Vendedor</option>
+                    <option value="3">Administrador</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
             <td>
                 Region :
                 <select name="selRegion" id="selRegion" onchange="cambioComuna(this)">
@@ -86,7 +97,6 @@
                     <option value="O Higgins">O´Higgins</option>
                     <option value="Maule">Maule</option>
                     <option value="Ñuble">Ñuble</option>
-                    Metropolitana, Valparaiso, O´Higgins, Maule, Ñuble
                 </select>
             </td>
             <td>
@@ -120,6 +130,8 @@
  <script src="js/Usuario.js"></script>
  <script>
 
+    let rolUser = "";
+
     let region = "";
     let comuna = "";
 
@@ -146,6 +158,15 @@
     let contraseñaConfirm = "";
     let numero = "";
 
+
+
+    // Tomar valor de Rol Usuario
+    function cambUser(valor){
+        const valUser = valor.value;
+        if(valUser !== "NoRol"){
+            rolUser = valUser;
+        }
+    }
 
 
     function cambioComuna(select){
@@ -192,7 +213,7 @@
       const id = usuarioGuardado.length > 0 ? usuarioGuardado[usuarioGuardado.length - 1].id + 1 : 1;
 
       // Validacion
-      if(validaciones(usuarioGuardado, nombre, contraseña, contraseñaConfirm, correo, correoConfirm, numero, region, comuna) === 0){
+      if(validacionNuevoUsuario(usuarioGuardado, nombre, contraseña, contraseñaConfirm, correo, correoConfirm, numero, region, comuna, rolUser) === 0){
         nuevaUsuario = new Usuario(id, nombre, correo, contraseña, numero, region, comuna, "Usuario")
         usuarioGuardado.push(nuevaUsuario);
         localStorage.setItem("usuarios", JSON.stringify(usuarioGuardado));
@@ -201,6 +222,7 @@
 
         region = "Nada";
         comuna = "";
+        rolUser = "";
       }
 
     }

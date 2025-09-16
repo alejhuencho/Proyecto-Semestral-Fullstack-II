@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro Usuario</title>
+    <title>Editar Usuario</title>
     <link rel="stylesheet" href="css/registroUsuarioEstilo.css">
 </head>
 <body>
   <header>
-    <h1>Registrar Usuario</h1>
+    <h1>Editar Usuario</h1>
+    <h2>Solo Ingrese datos donde desea cambiar algo</h2>
   </header>
   <section>
     <form id="formulario-producto">
@@ -77,6 +78,17 @@
           </td>
         </tr>
         <tr>
+            <td colspan="2">
+                Rol :
+                <select name="selRol" id="selRol" onchange="cambUser(this)">
+                    <option value="NoRol">Seleccione un rol</option>
+                    <option value="1">Usuario</option>
+                    <option value="2">Vendedor</option>
+                    <option value="3">Administrador</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
             <td>
                 Region :
                 <select name="selRegion" id="selRegion" onchange="cambioComuna(this)">
@@ -86,7 +98,6 @@
                     <option value="O Higgins">O´Higgins</option>
                     <option value="Maule">Maule</option>
                     <option value="Ñuble">Ñuble</option>
-                    Metropolitana, Valparaiso, O´Higgins, Maule, Ñuble
                 </select>
             </td>
             <td>
@@ -114,11 +125,14 @@
   </section>
 </body>
 <footer>
+    
 </footer>
 
 <!-- java Script -->
  <script src="js/Usuario.js"></script>
  <script>
+
+    let rolUser = "";
 
     let region = "";
     let comuna = "";
@@ -146,6 +160,15 @@
     let contraseñaConfirm = "";
     let numero = "";
 
+
+
+    // Tomar valor de Rol Usuario
+    function cambUser(valor){
+        const valUser = valor.value;
+        if(valUser !== "NoRol"){
+            rolUser = valUser;
+        }
+    }
 
 
     function cambioComuna(select){
@@ -179,59 +202,132 @@
 
     function guardarUsuario(){
 
+      // USuario a Editar
+      let usuEdit = JSON.parse(localStorage.getItem("usuarioEdit"))
+      let existe = 0;
+
       //Lista de Usuarios
       let usuarioGuardado = JSON.parse(localStorage.getItem("usuarios")) || [];
 
-      nombre = document.getElementById('txtNombre').value;
-      correo = document.getElementById('txtCorreo').value;
-      correoConfirm = document.getElementById('txtCorreoConfirm').value;
-      contraseña = document.getElementById('txtPass').value;
-      contraseñaConfirm = document.getElementById('txtPassConfirm').value;
-      numero = document.getElementById('numTel').value; 
+      // Insercion de valores
+      // Nombre
+      const nombre1 = document.getElementById('txtNombre').value;
+      nombre = usuEdit[0].nombre;
 
-      const id = usuarioGuardado.length > 0 ? usuarioGuardado[usuarioGuardado.length - 1].id + 1 : 1;
+      // Correo
+      const correo1 = document.getElementById('txtCorreo').value;
+      correo = usuEdit[0].correo;
+
+      // Confirmar Correo
+      const correoConfirm1 = document.getElementById('txtCorreoConfirm').value;
+      correoConfirm = usuEdit[0].correo;
+      
+      // Contraseña
+      const contraseña1 = document.getElementById('txtPass').value;
+      contraseña = usuEdit[0].contraseña;
+      
+      // Confirmar Contraseña
+      const contraseñaConfirm1 = document.getElementById('txtPassConfirm').value;
+      contraseñaConfirm = usuEdit[0].contraseña;
+
+      // Numero
+      const numero1 = document.getElementById('numTel').value;
+      numero = usuEdit[0].numero;
+
+      // Rol
+      rolUser = usuEdit[0].rol;
+
+      
+      // Verifica que no se repita el Nombre con uno ya Existente
+      usuarioGuardado.forEach(us => {
+        if (us.nombre == nombre1) {
+          alert("Ya hay un usuario con este Nombre");
+          existe = 1;
+        }
+
+        if(existe != 1){
+        for (let i = 0; i < 10; i++) {
+        // romper el ciclo en la 6ta iteracion
+            if(i == 6){
+                break;
+            }
+            // Nombre
+            if(nombre1.trim() != "") {
+                nombre = nombre1;
+            }
+            // Correo
+            if(correo1.trim() != "") {
+                correo = correo1;
+            }
+
+            // Confirmar Correo
+            if(correoConfirm1.trim() != ""){
+              correoConfirm = correoConfirm1;
+            }
+
+            // Contraseña
+            if(contraseña1.trim() != "") {
+              contraseña = contraseña1;
+            }
+            // Confirmar Contraseña
+            if(contraseñaConfirm1.trim() != ""){
+              contraseñaConfirm = contraseñaConfirm1;
+            }
+            // Numero
+            if(numero1.trim() != "") {
+                numero = numero1;
+            }
+            }
+        }
+      });
+      
 
       // Validacion
-      if(validaciones(usuarioGuardado, nombre, contraseña, contraseñaConfirm, correo, correoConfirm, numero, region, comuna) === 0){
-        nuevaUsuario = new Usuario(id, nombre, correo, contraseña, numero, region, comuna, "Usuario")
-        usuarioGuardado.push(nuevaUsuario);
-        localStorage.setItem("usuarios", JSON.stringify(usuarioGuardado));
+      if(validacionEditUser(usuarioGuardado, nombre, contraseña, contraseñaConfirm, correo, correoConfirm, numero, region, comuna) === 0){
 
-        console.log("El Usuario Es : "+nombre+' '+correo+' '+correoConfirm+' '+ contraseña+' '+ contraseñaConfirm+' '+ numero+' '+ region+' '+ comuna)
+
+        usuarioGuardado.forEach(us => {
+          if(us.id === usuEdit[0].id){
+            // Aplica los cambios
+            usuarioGuardado[us.id - 1].id = id;
+            usuarioGuardado[us.id - 1].nombre = nombre;
+            usuarioGuardado[us.id - 1].correo = correo;
+            usuarioGuardado[us.id - 1].contraseña = contraseña;
+            usuarioGuardado[us.id - 1].numero = numero;
+            usuarioGuardado[us.id - 1].rolUser = rolUser;
+            usuarioGuardado[us.id - 1].region = region;
+            usuarioGuardado[us.id - 1].comuna = comuna;
+
+            localStorage.setItem("usuarios", JSON.stringify(usuarioGuardado));
+          }
+        })
 
         region = "Nada";
         comuna = "";
+        rolUser = "NoRol";
       }
 
     }
  </script>
- <script src="js/validaciones.js"></script>
+ <script src="js/validacionesEditUser.js"></script>
  <script>
     // Limites
     // Nombre
-    document.getElementById("txtNombre").required = true;
     const nombreRequ = document.getElementById("txtNombre")
     // Máximo 50 caracteres
     nombreRequ.maxLength = 50;
 
     // Correo
-    document.getElementById("txtCorreo").required = true;
     let correoRequ = document.getElementById("txtCorreo") 
     // Máximo 100 caracteres
     nombreRequ.maxLength = 100;
 
-
-    // Confirmar Correo
-    document.getElementById("txtCorreoConfirm").required = true;
-
     // Contraseña
-    document.getElementById("txtPass").required = true;
     const password = document.getElementById("txtPass")
     // Maximo
     password.maxLength = 10;
 
     // Confirmar COntraseña
-    document.getElementById("txtPassConfirm").required = true;
     const passwordConfirm = document.getElementById("txtPass")
     // Maximo
     passwordConfirm.maxLength = 10;  

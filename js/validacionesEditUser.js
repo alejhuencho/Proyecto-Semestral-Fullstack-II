@@ -1,5 +1,5 @@
 // Validaciones Registro Usuario
-    function validaciones(usuarioGuardadoF, nombreF, contraseñaF, contraseñaConfirmF, correoF, correoConfirmF, numeroF, regionF, comunaF){
+    function validacionEditUser(usuarioGuardadoF, nombreF, contraseñaF, contraseñaConfirmF, correoF, correoConfirmF, numeroF, regionF, comunaF){
       let resultado = 0;
       if(valiNom(usuarioGuardadoF, nombreF) === false){
         resultado = 1;
@@ -18,29 +18,6 @@
       }
       return resultado;
     }
-
-// Validaciones Registro Usuario
-function validacionNuevoUsuario(usuarioGuardadoF, nombreF, contraseñaF, contraseñaConfirmF, correoF, correoConfirmF, numeroF, regionF, comunaF, rolUserF){
-  let resultado = 0;
-  if(valiNom(usuarioGuardadoF, nombreF) === false){
-    resultado = 1;
-  } else if(valiPass(contraseñaF) === false){
-    resultado = 1;
-  } else if(passConfi(contraseñaF, contraseñaConfirmF) === false){
-    resultado = 1;
-  } else if(valiCorre(correoF) === false){
-    resultado = 1;
-  } else if(correConfi(correoF, correoConfirmF) === false){
-    resultado = 1;
-  } else if(valiNum(numeroF) === false){
-    resultado = 1;
-  } else if(valRegiCom(regionF, comunaF) === false){
-    resultado = 1;
-  } else if(valiUsuario(rolUserF) === false){
-    resultado = 1;
-  }
-  return resultado;
-}
 
 // Nombre
     function valiNom(usuarioGuardadoF, nombreF){
@@ -66,7 +43,9 @@ function validacionNuevoUsuario(usuarioGuardadoF, nombreF, contraseñaF, contras
       if(valor < 4){
         document.getElementById("labelPass").innerHTML = "La contraseña es de minimo 4 caracteres";
         return false;
-      } else {
+      } else if (contraseñaF === ""){
+        return true;
+      }else {
         return true;
       }
     }
@@ -83,29 +62,33 @@ function validacionNuevoUsuario(usuarioGuardadoF, nombreF, contraseñaF, contras
 
     // Correo
     function valiCorre(correoF){
-      let carFormado = ""; // Caracter formado
-      let corteArroba = 0;
-
-      let correLimp = correoF.trim();
-
-      let larCorre = correLimp.length;
-
-      for(let index = 0; index < larCorre; index++) {
-        // Slice para cortar 
-        let caracter = correLimp.slice(index, index +1) // Primer valor , posicion de inicio , segundo valor , Posicion de termino
-        if(caracter === "@"){
-          carFormado += caracter;
-          corteArroba = 1; // Una vez pasado el arroba , forma el str
-        } else if (corteArroba === 1){
-          carFormado += caracter;
-        }
-      }
-      if(carFormado === "@gmail.com" || carFormado === "@duoc.cl" || carFormado === "@profesor.duoc.cl") {
-        console.log(carFormado);
+      if(correoF === ""){
         return true;
-      } else {
-        document.getElementById("labelCorreo").innerHTML = "Solo se permiten correos @gmail.com, @duoc.cl, @profesor.duoc.cl";
-        return false; // Indica si el correo es Correcto o No
+      } else{
+        let carFormado = ""; // Caracter formado
+        let corteArroba = 0;
+
+        let correLimp = correoF.trim();
+
+        let larCorre = correLimp.length;
+
+        for(let index = 0; index < larCorre; index++) {
+            // Slice para cortar 
+            let caracter = correLimp.slice(index, index +1) // Primer valor , posicion de inicio , segundo valor , Posicion de termino
+            if(caracter === "@"){
+            carFormado += caracter;
+            corteArroba = 1; // Una vez pasado el arroba , forma el str
+            } else if (corteArroba === 1){
+            carFormado += caracter;
+            }
+        }
+        if(carFormado === "@gmail.com" || carFormado === "@duoc.cl" || carFormado === "@profesor.duoc.cl") {
+            console.log(carFormado);
+            return true;
+        } else {
+            document.getElementById("labelCorreo").innerHTML = "Solo se permiten correos @gmail.com, @duoc.cl, @profesor.duoc.cl";
+            return false; // Indica si el correo es Correcto o No
+        }
       }
 
     }
@@ -122,12 +105,12 @@ function validacionNuevoUsuario(usuarioGuardadoF, nombreF, contraseñaF, contras
 
     // Numero
     function valiNum(numeroF){
-      if(numeroF === ""){
+      if(numeroF.trim() === ""){
         return true;
       }else{
-        let numStr = numeroF.trim()
-        numStr = numStr.replace(',' ,'')
-        numStr = numStr.replace('.', '')
+        let numStr = numeroF.trim();
+        numStr = numStr.replace(',' ,'');
+        numStr = numStr.replace('.', '');
         if(numStr.length !== 8){
           document.getElementById("labelTel").innerHTML = "Deben ser 8 Numeros";
           return false;
@@ -139,18 +122,10 @@ function validacionNuevoUsuario(usuarioGuardadoF, nombreF, contraseñaF, contras
 
     // Region y Comuna
     function valRegiCom(regionF, comunaF){
-      if(regionF === "Nada" || comunaF === ""){
-        alert("Debe ingresar una Region y una Comuna")
-        return false;
-      } else {
+      if(regionF === "Nada" && comunaF === ""){
         return true;
-      }
-    }
-
-    // Rol de Usuario
-    function valiUsuario(rolUserF){
-      if(rolUserF === "" || rolUser === "NoRol"){
-        alert("Seleccione un rol para el Usuario")
+      }else if(regionF !== "Nada" && comunaF === ""){
+        alert("Si ingresas una Region , debes ingresar su Comuna")
         return false;
       } else {
         return true;
