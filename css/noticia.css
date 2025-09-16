@@ -1,0 +1,45 @@
+.titulos {
+    text-align: center;
+}
+
+.padre {
+    border: 4px solid ;  
+    display: flex;
+    margin: 20px;
+    background-color: #1A1A1A;
+}
+
+.titulo-noticia {
+    padding: 12px;
+}
+
+.txt-noticia{
+    margin-right: 20px;
+    padding: 12px;
+    text-align: left;
+}
+
+.txt-sinopsis{
+    margin-right: 20px;
+    padding: 12px;
+    text-align: center;
+}
+
+.img-noticia {
+    margin: 16px;
+    align-items: end;
+    height: 250px;
+    width: 550px;
+}
+
+.img-articulo {
+    display: block;
+    margin: auto;
+    height: 500px;
+    width: 900px;
+}
+
+.subtitulo-articulo {
+    margin: 16px;
+    text-align: left;
+}

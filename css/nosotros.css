@@ -1,0 +1,45 @@
+
+
+:root {
+    --color-primary: #000000;      
+    --color-accent-blue: #00FFFF; 
+    --color-accent-green: #39FF14; 
+}
+
+
+body {
+    margin: 0;
+    background-color: #1A1A1A;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--color-accent-blue);
+}
+
+.titulos {
+    text-align: center;
+}
+
+.img-logo {
+    margin: 16px;
+    align-items: end;
+    height: 420px;
+    width: 550px;
+}
+
+
+.padre { 
+    display: flex;
+    margin: 20px;
+}
+
+hr {
+    border-color: white;
+}

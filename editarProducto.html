@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar Producto</title>
+  <link rel="stylesheet" href="css/editarProductoEstilo.css">
+</head>
+<body>
+  <header>
+    <h1>Editar Producto</h1>
+  </header>
+  <section>
+    <h2>Solo ingrese valores en los campos que desea cambiar</h2>
+    <form id="formulario-producto">
+      <table>
+        <tr>
+          <td colspan="2">
+            <label for="txtNombre">Nombre del Producto:</label>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input type="text" id="txtNombre" name="txtNombre">
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <label for="txtDescripcion">Descripción del Producto:</label>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <textarea id="txtDescripcion" name="txtDescripcion"></textarea>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <label for="numPrecio">Precio del Producto ($):</label>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input type="number" id="numPrecio" name="numPrecio" step="0.01">
+            <!-- step, define si son numeros enteros o decimales
+            step="1", numeros enteros
+            step="0.01, numero con 2 decimales
+            step="0.1", numero con 1 decimal-->
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <label for="imgImagen">Imagen del Producto:</label>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input type="file" id="imgImagen" name="imgImagen" accept="image/*" onchange="mostrarVistaPrevia(event)" >
+            <!-- onchance, realiza una accion cuando el input cambia -->
+            <img id="vista-previa" alt="Vista previa de imagen">
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <label for="numCantidad">Cantidad del Producto:</label>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input type="number" id="numCantidad" name="numCantidad">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <button type="submit">Guardar Cambios</button>
+          </td>
+          <td>
+            <button type="reset">Limpiar Formulario</button>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </section>
+  <script src="js/producto.js"></script>
+  <script>
+    // Cuando la imagen del input cambia , se muestra la vista previa
+    function mostrarVistaPrevia(event) {
+      const archivo = event.target.files[0];
+      // event , evento 
+      // target, el valor del evento (archivo)
+      // files, los archivos seleccionados
+      const vistaPrevia = document.getElementById('vista-previa');
+
+      if (archivo) {
+      const lector = new FileReader();
+
+      lector.onload = function(e) {
+        // onload, se ejecuta al cargar el archivo
+          vistaPrevia.src = e.target.result;
+          vistaPrevia.style.display = 'block';
+      };
+
+      lector.readAsDataURL(archivo);
+      }
+    };
+
+    document.getElementById('formulario-producto').addEventListener('submit', function(e) {
+      e.preventDefault(); // Evita el recargo de la página
+      actualizarProducto();
+    });
+
+ 
+
+    // Agregar productos
+    function actualizarProducto() {
+
+      let produEdit = JSON.parse(localStorage.getItem("productoEdit"));
+
+      // Valor Id
+      let id = produEdit[0].id;
+
+      // Valores Nombre
+      const nombre1 = document.getElementById('txtNombre').value;
+      let nombre = produEdit[0].nombre;
+
+      // Valores Descripcion
+      const descripcion1 = document.getElementById('txtDescripcion').value;
+      let descripcion = produEdit[0].descripcion;
+
+      // Valores Precio
+      const precioStr1 = document.getElementById('numPrecio').value;
+      let precioNum = produEdit[0].precio;
+      let precio // Esta variable luego recibe el valor numerico
+
+      // Valores Imagen
+      const imagen1 = document.getElementById('imgImagen').files[0]?.name || '';
+      let imagen = produEdit[0].imagen;
+
+      // Valores Cantidad
+      const cantidad1 = document.getElementById('numCantidad').value;
+      let cantidad = produEdit[0].cantidad;
+
+
+
+      let stockGuardado = JSON.parse(localStorage.getItem("stockProducto"));
+      let existe = 0;
+      // Verifica que no se repita el Nombre con uno ya Existente
+      stockGuardado.forEach(produ => {
+        if (produ.nombre == nombre1) {
+          alert("El producto ya existe");
+          existe = 1;
+        }
+      });
+
+
+      if(existe != 1){
+        for (let i = 0; i < 6; i++) {
+        // romper el ciclo en la 6ta iteracion
+        if(i == 6){
+          break;
+        }
+        // Nombre
+        if(nombre1.trim() != "") {
+            nombre = nombre1;
+            console.log(nombre)
+        }
+        // Descripcion
+        if(descripcion1.trim() != "") {
+            descripcion = descripcion1;
+        }
+        // Precio
+        if(precioStr1.trim() != "") {
+            precio = Number(precioStr1.replace('.', ''));
+        }
+        // Imagen
+        if(imagen1.trim() != "") {
+            imagen =imagen1;
+        }
+        // Cantidad
+        if(cantidad1.trim() != "") {
+            cantidad = Number(cantidad1.replace('.', ''));
+        }
+        }
+
+        stockGuardado.forEach(produ => {
+          if(produ.id === produEdit[0].id){
+            // Aplica los cambios
+            stockGuardado[produ.id - 1].id = id;
+            stockGuardado[produ.id - 1].nombre = nombre;
+            stockGuardado[produ.id - 1].descripcion = descripcion;
+            stockGuardado[produ.id - 1].precio = precio;
+            stockGuardado[produ.id - 1].imagen = imagen;
+            stockGuardado[produ.id - 1].cantidad = cantidad;
+
+            localStorage.setItem("stockProducto", JSON.stringify(stockGuardado));
+          }
+        })
+      }
+
+      existe = 0;
+
+    };
+  </script>
+</body>
+</html>

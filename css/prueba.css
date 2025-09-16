@@ -1,0 +1,75 @@
+
+/* ADVERTENCIA, el contenido al inicio de esta pagina fue hecho mientras todavia me estaba intentando familiarizar con como esto 
+funciona, asi que puede haber contenido que no tenga sentido*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+
+body {
+    background-color: #333;
+}
+
+header {
+    border: 4px solid;
+    margin: 20px;
+    padding: 10px;
+}
+
+.titulos {
+    text-align: center;
+}
+
+nav {
+    border: 4px solid;  
+    display: flexbox;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 10%;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+    gap: 60px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.padre {
+    border: 4px solid;  
+    display: flex;
+    margin: 20px;
+
+}
+
+
+.titulo-noticia {
+    padding: 12px;
+}
+
+.txt-noticia{
+    margin-right: 20px;
+    padding: 12px;
+    text-align: left;
+}
+
+
+.img-noticia {
+    margin: 16px;
+    align-items: flex-end;
+    height: 250px;
+    width: 350px;
+}
+
+.btn {
+    margin: 16px;
+    padding: 12px;
+    border: 4px solid;
+    display: inline-block;  
+}
