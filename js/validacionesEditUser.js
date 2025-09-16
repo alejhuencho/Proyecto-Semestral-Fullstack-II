@@ -122,7 +122,7 @@
 
     // Region y Comuna
     function valRegiCom(regionF, comunaF){
-      if(regionF === "Nada" && comunaF === ""){
+      if(regionF !== "Nada" && comunaF !== "0"){
         return true;
       }else if(regionF !== "Nada" && comunaF === ""){
         alert("Si ingresas una Region , debes ingresar su Comuna")
