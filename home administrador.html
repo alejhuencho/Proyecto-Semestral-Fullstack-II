@@ -32,7 +32,7 @@
                     <a href="listaUsuario.html" class="d-block text-black p-3"><ion-icon name="person" class="ms-2 lead"></ion-icon> Empleados</a>
                     <a href="listaUsuario.html" class="d-block text-black p-3"><ion-icon name="people" class="ms-2 lead"></ion-icon> Clientes</a>
                     <a href="#" class="d-block text-black p-3"><ion-icon name="settings" class="ms-2 lead"></ion-icon> Configuracion</a>
-                    <a href="#" class="d-block text-black p-3"><ion-icon name="contact" class="ms-2 lead"></ion-icon> Cerrar sesion</a>
+                    <a href="home.html" class="d-block text-black p-3"><ion-icon name="contact" class="ms-2 lead"></ion-icon> Cerrar sesion</a>
                 </div>
             </nav>
         </div>
@@ -45,21 +45,28 @@
                             <div class="col-lg-9">
                                 <header><h1 class="p-3"><strong>¡HOLA Administrador!</strong></h1></header> 
                                 <h2 class="p-3"><strong>Dashboard</strong></h2>
-                                <div class="d-flex">
-                                    <div class="card ms-3" style="width: 18rem;">
-                                        <img class="card-img-top img-fluid" src="img/productos_imagen.png" alt="Productos">
+                                <div class="d-flex align-items-center">
+                                    <div class="card ms-3" style="width: 24rem">
+                                        <img class="img-card" src="img/productos_imagen.png" alt="Productos">
                                         <div class="card-body">
                                             <h5 class="card-title">Productos</h5>
                                             <p class="card-text">Accede a los productos y permite su modificacion al igual que creacion de nuevos productos.</p>
-                                            <a href="listaProducto.html" class="btn btn-primary">Continuar</a>
+                                            <div class="d-flex">
+                                            <a href="editarProducto.html" class="btn btn-primary m-2">Editar producto</a>
+                                            <a href="nuevoUsuario.html" class="btn btn-primary m-2">Crear producto</a>
+                                            
+                                        </div>
                                         </div>
                                     </div>
-                                    <div class="card ms-2" style="width: 18rem;">
-                                        <img class="card-img-top img-fluid w-550" src="img/usuarios_imagen.png" alt="Usuarios">
+                                    <div class="card ms-2" style="width: 24rem;">
+                                        <img class="img-card" src="img/usuarios_imagen.png" alt="Usuarios">
                                         <div class="card-body">
                                             <h5 class="card-title">Usuarios</h5>
                                             <p class="card-text">Accede a los usuarios y permite su modificacion al igual que creacion de nuevos usuarios.</p>
-                                            <a href="listaUsuario.html" class="btn btn-primary">Continuar</a>
+                                            <div class="d-flex justify-content-center">
+                                                <a href="#" class="btn btn-primary m-2">Editar usuario</a>
+                                                <a href="nuevoUsuario.html" class="btn btn-primary m-2">Crear usuario</a>
+                                        </div>
                                         </div>
                                     </div>
                                 </div>

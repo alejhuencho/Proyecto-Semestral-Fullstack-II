@@ -1,0 +1,75 @@
+
+:root {
+    --color-primary: #000000;      
+    --color-accent-blue: #00FFFF; 
+    --color-accent-green: #39FF14; 
+}
+
+
+body {
+    margin: 0;
+    background-color: #1A1A1A;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+
+h1, h2, h4, h5, h6 {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--color-accent-blue);
+}
+
+h3 {
+    font-family: 'Orbitron', sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+#sidebar-container {
+    min-height: 100vh;
+    border: 1px solid;
+}
+
+#sidebar-container .logo {
+    padding: .875rem 1.25rem;
+}
+
+#sidebar-container .menu {
+    width: 18rem;
+}
+
+.bg-primary {background-color: whitesmoke !important;}
+
+.img-logo {
+    align-items: flex-end;
+    height: 45px;
+    width: 45px;
+}
+
+#content {
+    overflow-y: auto;
+    height: 100vh;
+    padding-bottom: 5rem;
+}
+
+hr {
+    border-color: #000000;
+}
+
+
+.btn{
+    background-color: #1E90FF !important;
+    border-color: #1E90FF !important;
+    color: #39FF14 !important;
+}
+
+.img-card{
+    margin: 0 auto;
+    height: 150px;
+    width: 200px;
+}
