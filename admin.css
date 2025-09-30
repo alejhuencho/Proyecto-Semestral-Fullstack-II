@@ -1,6 +1,7 @@
 
 :root {
-    --color-primary: #000000;      
+    --color-primary: #000000;     
+    --color-btn-background: #1E90FF; 
     --color-accent-blue: #00FFFF; 
     --color-accent-green: #39FF14; 
 }
@@ -9,20 +10,17 @@
 body {
     margin: 0;
     background-color: #1A1A1A;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-attachment: fixed;
     color: white;
     font-family: 'Roboto', sans-serif;
 }
 
-h1, h2, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6 {
     font-family: 'Orbitron', sans-serif;
     color: var(--color-accent-blue);
 }
 
-h3 {
+#titulo {
+    color: #000000;
     font-family: 'Orbitron', sans-serif;
 }
 
@@ -39,9 +37,7 @@ a {
     padding: .875rem 1.25rem;
 }
 
-#sidebar-container .menu {
-    width: 18rem;
-}
+
 
 .bg-primary {background-color: whitesmoke !important;}
 
@@ -51,25 +47,15 @@ a {
     width: 45px;
 }
 
-#content {
-    overflow-y: auto;
-    height: 100vh;
-    padding-bottom: 5rem;
-}
 
 hr {
     border-color: #000000;
 }
 
 
-.btn{
-    background-color: #1E90FF !important;
-    border-color: #1E90FF !important;
-    color: #39FF14 !important;
-}
 
-.img-card{
-    margin: 0 auto;
-    height: 150px;
-    width: 200px;
+.btn{
+    background-color: var(--color-btn-background);
+    border-color: var(--color-btn-background);
+    color: var(--color-accent-green);
 }
