@@ -1,78 +1,128 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    padding: 40px;
-}
+    background-color: #000000;
+    color: #FFFFFF;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+  }
 
-h1 {
-    text-align: center;
-    color: #333;
-}
-
-h2 {
-    text-align: center;
-    color: #333;
-}
-
-form {
-    background-color: #fff;
-    padding: 25px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    max-width: 500px;
-    margin: auto;
-}
-
-label {
-    display: block;
-    margin-top: 15px;
-    font-weight: bold;
-}
-
-input[type="text"],
-input[type="number"],
-input[type="file"],
-textarea {
+  .container {
     width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
+    max-width: 700px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-textarea {
-    resize: vertical;
-}
+  header h1 {
+    font-family: 'Orbitron', sans-serif;
+    color: #1E90FF;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 0 0 15px rgba(30, 144, 255, 0.7);
+  }
 
-img {
-    margin-top: 15px;
-    max-width: 100%;
-    display: none;
-    /*display: none;, oculta un elemento*/
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
+  section {
+    background-color: #111111;
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(30, 144, 255, 0.4);
+    width: 100%;
+  }
 
-button {
-    margin-top: 20px;
+  section h2 {
+    font-family: 'Roboto', sans-serif;
+    color: #39FF14;
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+
+  table {
+    width: 100%;
+    border-spacing: 15px;
+  }
+
+  label {
+    font-weight: 500;
+    color: #D3D3D3;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  input[type="file"],
+  textarea {
+    width: 100%;
     padding: 12px;
-    /*Espacio entre un elemento y su borde*/
-    width: 100%;
-    background-color: #28a745;
     border: none;
-    color: white;
-    font-size: 16px;
-    border-radius: 4px;
-    /*Dobla del borde*/
-}
+    border-radius: 10px;
+    background-color: #222222;
+    color: #FFFFFF;
+    font-size: 1rem;
+    outline: none;
+    transition: 0.3s;
+  }
 
-button:hover {
-    background-color: #218838;
-}
+  textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
 
-table {
+  input:focus,
+  textarea:focus {
+    box-shadow: 0 0 10px #1E90FF;
+    border: 1px solid #39FF14;
+  }
+
+  button {
     width: 100%;
-    border-collapse: collapse;
-    /*border-collapse: collapse, junta los bordes de las celdas de la tabla*/
-    margin-top: 20px;
-}
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+  }
+
+  button[type="submit"] {
+    background-color: #1E90FF;
+    color: #FFFFFF;
+  }
+
+  button[type="submit"]:hover {
+    background-color: #39FF14;
+    color: #000000;
+    box-shadow: 0 0 12px #39FF14;
+    transform: scale(1.05);
+  }
+
+  button[type="reset"] {
+    background-color: #39FF14;
+    color: #000000;
+  }
+
+  button[type="reset"]:hover {
+    background-color: #1E90FF;
+    color: #FFFFFF;
+    box-shadow: 0 0 10px #1E90FF;
+    transform: scale(1.05);
+  }
+
+  img#vista-previa {
+    display: block;
+    margin-top: 10px;
+    max-width: 100%;
+    max-height: 150px;
+    border-radius: 10px;
+    border: 1px solid #1E90FF;
+  }

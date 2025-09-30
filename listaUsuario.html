@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Usuarios</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/listaUsuarioEstilo.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.22.5/dist/sweetalert2.min.css" rel="stylesheet">
 </head>
 <body onload="cargarLista()">
     <header>
@@ -15,53 +17,15 @@
             <div id="tablaUsuarios"></div>
         </section>
     </main>
+    <footer>
+        
+    </footer>
 </body>
 <script src="js/Usuario.js"></script>
-<script>
-    var usuarioGuardado = JSON.parse(localStorage.getItem("usuarios"))
-    
-
-    function cargarLista() {
-        var tabla = "<table class=table table-dark>"
-        tabla += "<thead>"
-        tabla += "<t>"
-        tabla += "<th scope=col>Id</th> <th scope=col>Nombre</th> <th scope=col>Correo</th> <th scope=col>Telefono</th> <th scope=col>Region</th> <th scope=col>Comuna</th> <th scope=col>Rol</th>"
-        tabla +="</tr>"
-        tabla += "</thead>"
-        tabla += "<tbody>"
-        usuarioGuardado.forEach(item => {
-            tabla += "<tr>"
-            tabla += "<th scope=row>" + item.id + "</th>"
-            tabla += "<td>" + item.nombre + "</td>"
-            tabla += "<td>" + item.correo + "</td>"
-            tabla += "<td>" + item.telefono + "</td>"
-            tabla += "<td>" + item.region + "</td>"
-            tabla += "<td>" + item.comuna + "</td>"
-            tabla += "<td>" + item.rol + "</td>"
-            tabla += "<td> <input type='button' value='Descripcion Usuario' onclick='editProdu(" + item.id + ", " + 1 + ")'> </td>"
-            tabla += "<td> <input type='button' value='Editar Usuario' onclick='editProdu(" + item.id + ", " + 2 + ")'> </td>"
-            tabla += "</tr>"
-        })
-        tabla += "</tbody>"
-        tabla += "</table>"
-        document.getElementById("tablaUsuarios").innerHTML = tabla
-    }
-
-    function editProdu(posiUser, val){
-
-        usuarioGuardado.forEach(item => {
-            if(item.id === posiUser){
-                let listUserEdit = [
-                new Usuario(item.id, item.nombre, item.correo, item.contraseña, item.telefono, item.region, item.comuna, item.rol)
-                ]
-                localStorage.setItem("usuarioEdit", JSON.stringify(listUserEdit));
-            }
-            if(val === 1){
-                // location.href='editarProducto.html'
-            }else if(val === 2){
-                location.href='editarUsuario.html'
-            }
-        })
-        }
+<script 
+    src="https://cdn.jsdelivr.net/npm/sweetalert2@11.22.5/dist/sweetalert2.all.min.js">
+</script>
+<script 
+    src="js/listaUsuario.js">
 </script>
 </html>

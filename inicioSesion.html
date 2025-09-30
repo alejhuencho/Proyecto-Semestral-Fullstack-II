@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de Sesion</title>
+    <!--Cambiar el Style CSS-->
+    <!--<link rel="stylesheet" href="css/registroUsuarioEstilo.css">-->
+    <link rel="stylesheet" href="css/inicioSesion.css">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.22.5/dist/sweetalert2.min.css" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1>Iniciar Sesion</h1>
+  </header>
+  <main>
+    <section>
+      <form id="formulario-producto">
+        <table>
+          <!-- Nombre -->
+          <tr>
+            <td colspan="2">
+              <label id="labelNombre">Nombre Completo</label>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <input type="text" id="txtNombre" name="txtNombre">
+            </td>
+          </tr>
+          <!-- Correo -->
+          <tr>
+            <td colspan="2">
+              <label id="labelCorreo">Correo</label>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <input type="email" id="txtCorreo" name="txtCorreo">
+            </td>
+          </tr>
+          <!-- Contraseña -->
+          <tr>
+            <td colspan="2">
+              <label id="labelPass">Contraseña</label>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <input type="password" name="txtPass" id="txtPass">
+            </td>
+          </tr>
+          <!-- Numero de Telefono -->
+          <tr>
+            <td colspan="2">
+              <label id="labelTel">Numero Telefonico (Opcional)</label>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>+ 56 9</p>
+            </td>
+            <td>
+              <input type="text" name="numTel" id="numTel">
+            </td>
+          </tr>
+          <!-- Botones -->
+          <tr>
+            <td>
+              <button type="submit">Iniciar Sesion</button>
+            </td>
+            <td>
+              <button type="reset">Limpiar Formulario</button>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </section>
+  </main>
+  <footer>
+
+  </footer>
+  <script
+    src="https://cdn.jsdelivr.net/npm/sweetalert2@11.22.5/dist/sweetalert2.all.min.js">
+  </script>
+  <script src="js/inicioSesion.js">
+  </script>
+  <script>
+    // Limites
+    // Nombre
+    document.getElementById("txtNombre").required = true;
+    const nombreRequ = document.getElementById("txtNombre")
+    // Máximo 50 caracteres
+    nombreRequ.maxLength = 50;
+
+    // Correo
+    document.getElementById("txtCorreo").required = true;
+    let correoRequ = document.getElementById("txtCorreo") 
+    // Máximo 100 caracteres
+    nombreRequ.maxLength = 100;
+
+    // Contraseña
+    document.getElementById("txtPass").required = true;
+    const password = document.getElementById("txtPass")
+    // Maximo
+    password.maxLength = 10;
+  </script>
+</body>
+</html>

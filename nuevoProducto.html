@@ -5,141 +5,88 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nuevo Producto</title>
   <link rel="stylesheet" href="css/nuevoProductoEstilo.css">
+  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.22.5/dist/sweetalert2.min.css" rel="stylesheet">
 </head>
 <body>
   <header>
     <h1>Crear Producto</h1>
   </header>
-  <section>
-    <form id="formulario-producto">
-      <table>
-        <tr>
-          <td colspan="2">
-            <label id="labelNombre">Nombre del Producto:</label>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <input type="text" id="txtNombre" name="txtNombre">
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <label id="labelDescripcion">Descripción del Producto:</label>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <textarea id="txtDescripcion" name="txtDescripcion"></textarea>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <label id="labelPrecio">Precio del Producto ($):</label>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <input type="number" id="numPrecio" name="numPrecio" step="0.01">
-            <!-- step, define si son numeros enteros o decimales
-            step="1", numeros enteros
-            step="0.01, numero con 2 decimales
-            step="0.1", numero con 1 decimal-->
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <label id="labelImagen">Imagen del Producto:</label>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <input type="file" id="imgImagen" name="imgImagen" accept="image/*" onchange="mostrarVistaPrevia(event)" >
-            <!-- onchance, realiza una accion cuando el input cambia -->
-            <img id="vista-previa" alt="Vista previa de imagen">
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <label id="labelCantidad">Cantidad del Producto:</label>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <input type="number" id="numCantidad" name="numCantidad">
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <button type="submit">Guardar Producto</button>
-          </td>
-          <td>
-            <button type="reset">Limpiar Formulario</button>
-          </td>
-        </tr>
-      </table>
-    </form>
-  </section>
+  <main>
+    <section>
+      <form id="formulario-producto">
+        <table>
+          <tr>
+            <td colspan="2">
+              <label id="labelNombre">Nombre del Producto:</label>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <input type="text" id="txtNombre" name="txtNombre">
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <label id="labelDescripcion">Descripción del Producto:</label>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <textarea id="txtDescripcion" name="txtDescripcion"></textarea>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <label id="labelPrecio">Precio del Producto ($):</label>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <input type="number" id="numPrecio" name="numPrecio" step="0.01">
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <label id="labelImagen">Imagen del Producto:</label>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <input type="file" id="imgImagen" name="imgImagen" accept="image/*" onchange="mostrarVistaPrevia(event)" >
+              <img id="vista-previa" alt="Vista previa de imagen">
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <label id="labelCantidad">Cantidad del Producto:</label>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <input type="number" id="numCantidad" name="numCantidad">
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="submit">Guardar Producto</button>
+            </td>
+            <td>
+              <button type="reset">Limpiar Formulario</button>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </section>
+  </main>
+  <footer>
+
+  </footer>
+  <script 
+    src="https://cdn.jsdelivr.net/npm/sweetalert2@11.22.5/dist/sweetalert2.all.min.js">
+  </script>
   <script src="js/producto.js"></script>
-  <script>
-    // Cuando la imagen del input cambia , se muestra la vista previa
-    function mostrarVistaPrevia(event) {
-      const archivo = event.target.files[0];
-      const vistaPrevia = document.getElementById('vista-previa');
-
-      if (archivo) {
-      const lector = new FileReader();
-
-      lector.onload = function(e) {
-          vistaPrevia.src = e.target.result;
-          vistaPrevia.style.display = 'block';
-      };
-
-      lector.readAsDataURL(archivo);
-      }
-    };
-
-    // JSON.stringify(), es para cambiar un objeto o lista a texto en forma JSON
-    
-    document.getElementById('formulario-producto').addEventListener('submit', function(e) {
-      e.preventDefault(); // Evita el recargo de la página
-      agregarProducto();
-    });
-
-    // Agregar productos
-    function agregarProducto() {
-
-      let stockGuardado = JSON.parse(localStorage.getItem("stockProducto")) || [];
-
-      const nombre = document.getElementById('txtNombre').value;
-      const descripcion = document.getElementById('txtDescripcion').value;
-      // Pasar de string a numero
-      const precioStr = document.getElementById('numPrecio').value;
-      const precio = Number(precioStr.replace('.', ''));
-      // --------------------------
-      const imagen = "img/" + document.getElementById('imgImagen').files[0].name || '';
-      const cantidad = document.getElementById('numCantidad').value;
-
-      const id = stockGuardado.length > 0 ? stockGuardado[stockGuardado.length - 1].id + 1 : 1;
-
-      const nuevoProducto = new Producto(id, nombre, descripcion, precio, imagen, cantidad);
-
-      let existe = 0;
-      stockGuardado.forEach(produ => {
-        if (produ.nombre == nuevoProducto.nombre) {
-          existe = 1;
-        }
-      });
-      if (existe == 1) {
-        alert("El producto ya existe");
-      } else {
-        stockGuardado.push(nuevoProducto);
-        localStorage.setItem("stockProducto", JSON.stringify(stockGuardado));
-        return;
-      }
-      // reinicio de contador
-      existe = 0;
-  };
+  <script 
+      src="js/nuevoProducto.js">
   </script>
   <script>
     // Nombre
@@ -157,10 +104,6 @@
     // Cantidad
     document.getElementById("numCantidad").required = true;
 
-
-    //const nombreProdu = document.getElementById("txtNombre")
-    // Máximo 50 caracteres
-    //nombreRequ.maxLength = 100;
   </script>
 </body>
 </html>
