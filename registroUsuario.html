@@ -5,215 +5,157 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro Usuario</title>
     <link rel="stylesheet" href="css/registroUsuarioEstilo.css">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.22.5/dist/sweetalert2.min.css" rel="stylesheet">
 </head>
 <body>
   <header>
     <h1>Registrar Usuario</h1>
   </header>
-  <section>
-    <form id="formulario-producto">
-      <table>
-        <tr>
-          <td colspan="2">
-            <label id="labelNombre">Nombre Completo</label>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <input type="text" id="txtNombre" name="txtNombre">
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <label id="labelCorreo">Correo</label>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <input type="email" id="txtCorreo" name="txtCorreo">
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <label id="labelCorreoConfirm">Confirmar Correo</label>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <input type="email" id="txtCorreoConfirm" name="txtCorreoConfirm">
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <label id="labelPass">Contraseña</label>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <input type="password" name="txtPass" id="txtPass">
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <label id="labelPassConfirm">Confirmar Contraseña</label>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <input type="password" name="txtPassConfirm" id="txtPassConfirm">
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <label id="labelTel">Numero Telefonico (Opcional)</label>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <p>+ 56 9</p>
-          </td>
-          <td>
-            <input type="text" name="numTel" id="numTel">
-          </td>
-        </tr>
-        <tr>
+  <main>
+    <section>
+      <form id="formulario-producto">
+        <table>
+          <!--Nombre-->
+          <tr>
+            <td colspan="2">
+              <label id="labelNombre">Nombre Completo</label>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <input type="text" id="txtNombre" name="txtNombre">
+            </td>
+          </tr>
+          <!--Rut-->
+          <tr>
+            <td colspan="2">
+              <label id="labelRut">RUT</label>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <input type="text" id="txtRut" name="txtRut">
+            </td>
+          </tr>
+          <!--Correo-->
+          <tr>
+            <td colspan="2">
+              <label id="labelCorreo">Correo</label>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <input type="email" id="txtCorreo" name="txtCorreo">
+            </td>
+          </tr>
+          <!--Confirmar Correo-->
+          <tr>
+            <td colspan="2">
+              <label id="labelCorreoConfirm">Confirmar Correo</label>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <input type="email" id="txtCorreoConfirm" name="txtCorreoConfirm">
+            </td>
+          </tr>
+          <!--Contraseña-->
+          <tr>
+            <td colspan="2">
+              <label id="labelPass">Contraseña</label>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <input type="password" name="txtPass" id="txtPass">
+            </td>
+          </tr>
+          <!--Confirmar Contraseña-->
+          <tr>
+            <td colspan="2">
+              <label id="labelPassConfirm">Confirmar Contraseña</label>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <input type="password" name="txtPassConfirm" id="txtPassConfirm">
+            </td>
+          </tr>
+          <!--Numero-->
+          <tr>
+            <td colspan="2">
+              <label id="labelTel">Numero Telefonico (Opcional)</label>
+            </td>
+          </tr>
+          <tr>
             <td>
-                Region :
-                <select name="selRegion" id="selRegion" onchange="cambioComuna(this)">
-                    <option value="Nada">Seleccione una Region</option>
-                    <option value="Metropolitana">Metropolitana</option>
-                    <option value="Valparaiso">Valparaiso</option>
-                    <option value="O Higgins">O´Higgins</option>
-                    <option value="Maule">Maule</option>
-                    <option value="Ñuble">Ñuble</option>
-                    Metropolitana, Valparaiso, O´Higgins, Maule, Ñuble
-                </select>
+              <p>+ 56 9</p>
             </td>
             <td>
-                Comuna : 
-                <select name="selComuna" id="selComuna" onchange="valorComuna(this)"> 
-                    <option value="0">Seleccione una Comuna</option>
-                    <option value="1"><label id="txtComuna1">Comuna 1</label></option>
-                    <option value="2"><label id="txtComuna2">Comuna 2</label></option>
-                    <option value="3"><label id="txtComuna3">Comuna 3</label></option>
-                    <option value="4"><label id="txtComuna4">Comuna 4</label></option>
-                    <option value="5"><label id="txtComuna5">Comuna 5</label></option>
-                </select>
+              <input type="text" name="numTel" id="numTel">
             </td>
-        </tr>
-        <tr>
-          <td>
-            <button type="submit">Registrarse</button>
-          </td>
-          <td>
-            <button type="reset">Limpiar Formulario</button>
-          </td>
-        </tr>
-      </table>
-    </form>
-  </section>
-</body>
-<footer>
-  <a href="home administrador.html">seguir</a>
-</footer>
-
-<!-- java Script -->
- <script src="js/Usuario.js"></script>
- <script>
-
-    let region = "";
-    let comuna = "";
-
-    // Diccionario de Regiones y COmunas
-    let comuRegi = {
-            "Metropolitana": [ "Santiago", "Las Condes", "Providencia", "Peñalolén", "Vitacura"],
-            "Valparaiso": ["Valparaíso", "Viña del Mar", "Concepción", "Quilpué", "Limache"],
-            "O Higgins": ["Rancagua", "San Fernando", "Pichilemu", "Colchagua", "Santa Cruz"],
-            "Maule": ["Talca", "Curicó", "Linares", "Cauquenes", "Pelarco"],
-            "Ñuble": ["Chillán", "Bulnes", "Yungay", "Chillán Viejo", "Yerbas Buenas"]
-        };
-
-
-
-    document.getElementById('formulario-producto').addEventListener('submit', function(e) {
-      e.preventDefault(); // Evita el recargo de la página
-      guardarUsuario();
-    });
-
-    let nombre = "";
-    let correo = "";
-    let correoConfirm = "";
-    let contraseña = "";
-    let contraseñaConfirm = "";
-    let numero = "";
-
-
-
-    function cambioComuna(select){
-
-      const valRegi = select.value;
-      if(valRegi !== "Nada"){
-        region = valRegi;
-        document.getElementById("txtComuna1").innerHTML = comuRegi[valRegi][0];
-        document.getElementById("txtComuna2").innerHTML = comuRegi[valRegi][1];
-        document.getElementById("txtComuna3").innerHTML = comuRegi[valRegi][2];
-        document.getElementById("txtComuna4").innerHTML = comuRegi[valRegi][3];
-        document.getElementById("txtComuna5").innerHTML = comuRegi[valRegi][4];
-      }
-    }
-
-
-    function valorComuna(select){
-      if(region !== "Nada"){
-        const valCom = select.value;
-        comuna = valCom;
-        let numComuna = Number(comuna);
-        if(numComuna >= 1 && numComuna <= 5){
-          numComuna = numComuna - 1;
-          comuna = comuRegi[region][numComuna];
-        }
-      }
-    }
-
-
-
-
-    function guardarUsuario(){
-
-      //Lista de Usuarios
-      let usuarioGuardado = JSON.parse(localStorage.getItem("usuarios")) || [];
-
-      nombre = document.getElementById('txtNombre').value;
-      correo = document.getElementById('txtCorreo').value;
-      correoConfirm = document.getElementById('txtCorreoConfirm').value;
-      contraseña = document.getElementById('txtPass').value;
-      contraseñaConfirm = document.getElementById('txtPassConfirm').value;
-      numero = document.getElementById('numTel').value; 
-
-      const id = usuarioGuardado.length > 0 ? usuarioGuardado[usuarioGuardado.length - 1].id + 1 : 1;
-
-      // Validacion
-      if(validaciones(usuarioGuardado, nombre, contraseña, contraseñaConfirm, correo, correoConfirm, numero, region, comuna) === 0){
-        nuevaUsuario = new Usuario(id, nombre, correo, contraseña, numero, region, comuna, "Usuario")
-        usuarioGuardado.push(nuevaUsuario);
-        localStorage.setItem("usuarios", JSON.stringify(usuarioGuardado));
-
-        console.log("El Usuario Es : "+nombre+' '+correo+' '+correoConfirm+' '+ contraseña+' '+ contraseñaConfirm+' '+ numero+' '+ region+' '+ comuna)
-        location.href='home administrador.html'
-        region = "Nada";
-        comuna = "";
-      }
-
-    }
- </script>
- <script src="js/validaciones.js"></script>
- <script>
+          </tr>
+          <!--Region y Comuna-->
+          <tr>
+              <td>
+                  Region :
+                  <select name="selRegion" id="selRegion" onchange="cambioComuna(this)">
+                      <option value="Nada">Seleccione una Region</option>
+                      <option value="Metropolitana">Metropolitana</option>
+                      <option value="Valparaiso">Valparaiso</option>
+                      <option value="O Higgins">O´Higgins</option>
+                      <option value="Maule">Maule</option>
+                      <option value="Ñuble">Ñuble</option>
+                      Metropolitana, Valparaiso, O´Higgins, Maule, Ñuble
+                  </select>
+              </td>
+              <td>
+                  Comuna : 
+                  <select name="selComuna" id="selComuna" onchange="valorComuna(this)"> 
+                      <option value="0">Seleccione una Comuna</option>
+                      <option value="1"><label id="txtComuna1">Comuna 1</label></option>
+                      <option value="2"><label id="txtComuna2">Comuna 2</label></option>
+                      <option value="3"><label id="txtComuna3">Comuna 3</label></option>
+                      <option value="4"><label id="txtComuna4">Comuna 4</label></option>
+                      <option value="5"><label id="txtComuna5">Comuna 5</label></option>
+                  </select>
+              </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="submit">Registrarse</button>
+            </td>
+            <td>
+              <button type="reset">Limpiar Formulario</button>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </section>
+  </main>
+  <footer>
+  
+  </footer>
+  <!-- java Script -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/sweetalert2@11.22.5/dist/sweetalert2.all.min.js">
+  </script>
+  <script src="js/usuario.js"></script>
+  <script src="js/validaciones.js"></script>
+  <script src="js/registroUsuario.js"></script>
+  <script>
     // Limites
     // Nombre
     document.getElementById("txtNombre").required = true;
     const nombreRequ = document.getElementById("txtNombre")
     // Máximo 50 caracteres
     nombreRequ.maxLength = 50;
+
+    // Rut
+    document.getElementById("txtRut").required = true;
+    const rutRequ = document.getElementById("txtRut")
+    // Máximo 10 caracteres
+    rutRequ.maxLength = 10;
 
     // Correo
     document.getElementById("txtCorreo").required = true;
@@ -236,5 +178,6 @@
     const passwordConfirm = document.getElementById("txtPass")
     // Maximo
     passwordConfirm.maxLength = 10;  
- </script>
+  </script>
+</body>
 </html>

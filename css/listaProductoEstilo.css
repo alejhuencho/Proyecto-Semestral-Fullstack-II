@@ -1,0 +1,87 @@
+
+body {
+    background-color: #131111;
+    color: #FFFFFF;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+header h1 {
+    font-family: 'Orbitron', sans-serif;
+    color: #1E90FF;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+}
+
+#tablaProductos {
+    width: 100%;
+    max-width: 1200px;
+    overflow-x: auto;
+    background-color: #111111;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(30, 144, 255, 0.5);
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #FFFFFF;
+}
+
+thead {
+    background-color: #1E90FF;
+}
+
+thead th {
+    padding: 12px;
+    text-align: left;
+    color: #000000;
+    font-weight: bold;
+}
+
+tbody tr {
+    background-color: #222222;
+}
+
+tbody td, tbody th {
+    padding: 10px;
+    border-bottom: 1px solid #333333;
+}
+
+tbody img {
+    border-radius: 8px;
+    border: 2px solid #1E90FF;
+    box-shadow: 0 0 10px rgba(30, 144, 255, 0.5);
+}
+
+input[type="button"] {
+    background-color: #1E90FF;
+    color: #FFFFFF;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+
+input[type="button"]:hover {
+    background-color: #39FF14;
+    color: #000000;
+}
+
+
+#tablaProductos > input[type="button"] {
+    margin-top: 20px;
+    width: 100%;
+    font-size: 1.1rem;
+    padding: 12px;
+}

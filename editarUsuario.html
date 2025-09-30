@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Usuario</title>
     <link rel="stylesheet" href="css/editarUsuarioEstilo.css">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.22.5/dist/sweetalert2.min.css" rel="stylesheet">
 </head>
 <body>
   <header>
@@ -23,6 +24,17 @@
           <tr>
             <td colspan="2">
               <input type="text" id="txtNombre" name="txtNombre">
+            </td>
+          </tr>
+          <!--Rut-->
+          <tr>
+            <td colspan="2">
+              <label id="labelRut">Rut</label>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <input type="text" id="txtRut" name="txtRut">
             </td>
           </tr>
           <tr>
@@ -115,7 +127,7 @@
           </tr>
           <tr>
             <td>
-              <button type="submit">Registrarse</button>
+              <button type="submit">Actualizar</button>
             </td>
             <td>
               <button type="reset">Limpiar Formulario</button>
@@ -125,222 +137,41 @@
       </form>
     </section>
   </main>
-<footer>
+  <footer>
     
-</footer>
-
-<!-- java Script -->
- <script src="js/Usuario.js"></script>
- <script>
-
-    let rolUser = "";
-
-    let region = "";
-    let comuna = "";
-
-    // Diccionario de Regiones y COmunas
-    let comuRegi = {
-            "Metropolitana": [ "Santiago", "Las Condes", "Providencia", "Peñalolén", "Vitacura"],
-            "Valparaiso": ["Valparaíso", "Viña del Mar", "Concepción", "Quilpué", "Limache"],
-            "O Higgins": ["Rancagua", "San Fernando", "Pichilemu", "Colchagua", "Santa Cruz"],
-            "Maule": ["Talca", "Curicó", "Linares", "Cauquenes", "Pelarco"],
-            "Ñuble": ["Chillán", "Bulnes", "Yungay", "Chillán Viejo", "Yerbas Buenas"]
-        };
-
-
-
-    document.getElementById('formulario-producto').addEventListener('submit', function(e) {
-      e.preventDefault(); // Evita el recargo de la página
-      guardarUsuario();
-    });
-
-    let nombre = "";
-    let correo = "";
-    let correoConfirm = "";
-    let contraseña = "";
-    let contraseñaConfirm = "";
-    let numero = "";
-
-
-
-    // Tomar valor de Rol Usuario
-    function cambUser(valor){
-        const valUser = valor.value;
-        if(valUser !== "NoRol"){
-            rolUser = valUser;
-        }
-    }
-
-
-    function cambioComuna(select){
-
-      const valRegi = select.value;
-      if(valRegi !== "Nada"){
-        region = valRegi;
-        document.getElementById("txtComuna1").innerHTML = comuRegi[valRegi][0];
-        document.getElementById("txtComuna2").innerHTML = comuRegi[valRegi][1];
-        document.getElementById("txtComuna3").innerHTML = comuRegi[valRegi][2];
-        document.getElementById("txtComuna4").innerHTML = comuRegi[valRegi][3];
-        document.getElementById("txtComuna5").innerHTML = comuRegi[valRegi][4];
-      }
-    }
-
-
-    function valorComuna(select){
-      if(region !== "Nada"){
-        const valCom = select.value;
-        comuna = valCom;
-        let numComuna = Number(comuna);
-        if(numComuna >= 1 && numComuna <= 5){
-          numComuna = numComuna - 1;
-          comuna = comuRegi[region][numComuna];
-        }
-      }
-    }
-
-
-
-
-    function guardarUsuario(){
-
-      // USuario a Editar
-      let usuEdit = JSON.parse(localStorage.getItem("usuarioEdit"))
-      let existe = 0;
-
-      //Lista de Usuarios
-      let usuarioGuardado = JSON.parse(localStorage.getItem("usuarios")) || [];
-
-      // Insercion de valores
+  </footer>
+  <script
+    src="https://cdn.jsdelivr.net/npm/sweetalert2@11.22.5/dist/sweetalert2.all.min.js">
+  </script>
+  <script src="js/Usuario.js"></script>
+  <script src="js/editarUsuario.js"></script>
+  <script src="js/validacionesEditUser.js"></script>
+  <script>
+      // Limites
       // Nombre
-      const nombre1 = document.getElementById('txtNombre').value;
-      nombre = usuEdit[0].nombre;
+      const nombreRequ = document.getElementById("txtNombre")
+      // Máximo 50 caracteres
+      nombreRequ.maxLength = 50;
+
+      // Rut
+      const rutRequ = document.getElementById("txtRut")
+      // Máximo 10 caracteres
+      rutRequ.maxLength = 10;
 
       // Correo
-      const correo1 = document.getElementById('txtCorreo').value;
-      correo = usuEdit[0].correo;
+      let correoRequ = document.getElementById("txtCorreo") 
+      // Máximo 100 caracteres
+      nombreRequ.maxLength = 100;
 
-      // Confirmar Correo
-      const correoConfirm1 = document.getElementById('txtCorreoConfirm').value;
-      correoConfirm = usuEdit[0].correo;
-      
       // Contraseña
-      const contraseña1 = document.getElementById('txtPass').value;
-      contraseña = usuEdit[0].contraseña;
-      
-      // Confirmar Contraseña
-      const contraseñaConfirm1 = document.getElementById('txtPassConfirm').value;
-      contraseñaConfirm = usuEdit[0].contraseña;
+      const password = document.getElementById("txtPass")
+      // Maximo
+      password.maxLength = 10;
 
-      // Numero
-      const numero1 = document.getElementById('numTel').value;
-      numero = usuEdit[0].telefono;
-
-      // Rol
-      rolUser = usuEdit[0].rol;
-
-      // Region y Comuna
-      let regiEdit = usuEdit[0].region;
-      let comuEdit = usuEdit[0].comuna;
-
-      
-      // Verifica que no se repita el Nombre con uno ya Existente
-      usuarioGuardado.forEach(us => {
-        if (us.nombre == nombre1) {
-          alert("Ya hay un usuario con este Nombre");
-          existe = 1;
-        }
-
-        if(existe != 1){
-        for (let i = 0; i < 10; i++) {
-        // romper el ciclo en la 6ta iteracion
-            if(i == 10){
-                break;
-            }
-            // Nombre
-            if(nombre1.trim() != "") {
-                nombre = nombre1;
-            }
-            // Correo
-            if(correo1.trim() != "") {
-                correo = correo1;
-            }
-
-            // Confirmar Correo
-            if(correoConfirm1.trim() != ""){
-              correoConfirm = correoConfirm1;
-            }
-
-            // Contraseña
-            if(contraseña1.trim() != "") {
-              contraseña = contraseña1;
-            }
-            // Confirmar Contraseña
-            if(contraseñaConfirm1.trim() != ""){
-              contraseñaConfirm = contraseñaConfirm1;
-            }
-            // Numero
-            if(numero1.trim() != "") {
-                numero = numero1;
-            }
-            if(region !== "" || region !== "Nada"){
-              regiEdit = region;
-              if(comuna !== "" || comuna !== "0"){
-                comuEdit = comuna;
-              }
-            }
-            }
-        }
-      });
-      
-
-      // Validacion
-      if(validacionEditUser(usuarioGuardado, nombre, contraseña, contraseñaConfirm, correo, correoConfirm, numero, regiEdit, comuEdit) === 0){
-
-
-        usuarioGuardado.forEach(us => {
-          if(us.id === usuEdit[0].id){
-            // Aplica los cambios
-            usuarioGuardado[us.id - 1].nombre = nombre;
-            usuarioGuardado[us.id - 1].correo = correo;
-            usuarioGuardado[us.id - 1].contraseña = contraseña;
-            usuarioGuardado[us.id - 1].telefono = numero;
-            usuarioGuardado[us.id - 1].rol = rolUser;
-            usuarioGuardado[us.id - 1].region = regiEdit;
-            usuarioGuardado[us.id - 1].comuna = comuEdit;
-
-            localStorage.setItem("usuarios", JSON.stringify(usuarioGuardado));
-          }
-        })
-
-        region = "Nada";
-        comuna = "";
-        rolUser = "NoRol";
-      }
-
-    }
- </script>
- <script src="js/validacionesEditUser.js"></script>
- <script>
-    // Limites
-    // Nombre
-    const nombreRequ = document.getElementById("txtNombre")
-    // Máximo 50 caracteres
-    nombreRequ.maxLength = 50;
-
-    // Correo
-    let correoRequ = document.getElementById("txtCorreo") 
-    // Máximo 100 caracteres
-    nombreRequ.maxLength = 100;
-
-    // Contraseña
-    const password = document.getElementById("txtPass")
-    // Maximo
-    password.maxLength = 10;
-
-    // Confirmar COntraseña
-    const passwordConfirm = document.getElementById("txtPass")
-    // Maximo
-    passwordConfirm.maxLength = 10;  
- </script>
+      // Confirmar COntraseña
+      const passwordConfirm = document.getElementById("txtPass")
+      // Maximo
+      passwordConfirm.maxLength = 10;  
+  </script>
 </body>
 </html>
